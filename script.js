@@ -41,51 +41,34 @@ function playTheGame(){
     let result = 'tie'
     
 
+    
+
     let humanscore = document.getElementById('hScore')
     let computerscore = document.getElementById('cScore')
 
-    switch (result) {
-        case hc == 'rock' && cc =='rock':
-            break;
     
-        case hc == 'rock' && cc =='paper':
-            result = "computer"
-            break;
-        case hc == 'rock' && cc =='scissors':
-            result = "human"
-            break;
-        case hc == 'paper' && cc =='rock':
-            result = "human"
-            break;
-        case hc == 'paper' && cc =='paper':
-            break;
-        case hc == 'paper' && cc =='scissors':
-            result = "computer"
-            break;
-        case hc == 'scissors' && cc =='rock':
-            result = "computer"
-            break;
-        case hc == 'scissors' && cc =='paper':
-            result = "human"
-            break;
-        case hc == 'scissors' && cc =='scissors':
-            
-            break;
+    if((hc == 'rock' && cc =='rock') || (hc == 'paper' && cc =='paper')|| (hc == 'scissors' && cc =='scissors'))
+    {
+        result = "tie"
     }
     
-// wziac value z humanscore ktore jest w stringu zparsowac do inta dodac 1 nastepnie zparsowac do stringa i przypisac
-
-    if(result = 'human')    
+    if((hc == 'rock' && cc =='scissors')||(hc == 'paper' && cc =='rock')||(hc == 'scissors' && cc =='paper'))
     {
-           
-        humanscore.textContent = toString(parseInt(humanscore.textContent) +1)
-        
-
+        result = "human"
     }
-    else if(result = 'computer')
+    if((hc == 'rock' && cc =='paper')||(hc == 'paper' && cc =='scissors')||(hc == 'scissors' && cc =='rock'))
     {
-        
-        computerscore.textContent = toString(parseInt(computerscore.textContent) +1)
+        result = "computer"
+    }
+
+
+    if(result == 'human')    
+    {
+        humanscore.textContent = parseInt(humanscore.textContent) + 1
+    }
+    if(result == 'computer')
+    {
+        computerscore.textContent = parseInt(computerscore.textContent) +1
     }
     else{
         alert('its a tie !!!')
