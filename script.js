@@ -1,5 +1,10 @@
 
-startButton = document.getElementById('start')
+startButton = document.querySelector('#start')
+let humanScore  = 0
+let computerScore = 0
+let humanScoreDisplay = document.getElementById('hScore')
+let computerScoreDisplay = document.getElementById('cScore')
+
 
 // gets random number from math.random from 1-3 and then assigns rock paper scissors
 function getComputerChoice(){
@@ -11,6 +16,15 @@ function getComputerChoice(){
     return pcChoice
 }
 
+function handleClick(){
+    
+    if(!gameOver())playRound()
+}
+
+function isGameover(){
+    if (humanScore === 5||computerScore === 5) return true;
+    else return false
+}
 
 //gets a choice from user by prompt
 function getHumanChoice(){
@@ -35,45 +49,61 @@ function getHumanChoice(){
     return humanChoice
 }
 
-function playTheGame(){
-    let hc = getHumanChoice()//human choice
-    let cc = getComputerChoice()//computer choice 
-    let result = 'tie'
-    
+function gameOver(){
 
-    
-
-    let humanscore = document.getElementById('hScore')
-    let computerscore = document.getElementById('cScore')
-
-    
-    if((hc == 'rock' && cc =='rock') || (hc == 'paper' && cc =='paper')|| (hc == 'scissors' && cc =='scissors'))
-    {
-        result = "tie"
-    }
-    
-    if((hc == 'rock' && cc =='scissors')||(hc == 'paper' && cc =='rock')||(hc == 'scissors' && cc =='paper'))
-    {
-        result = "human"
-    }
-    if((hc == 'rock' && cc =='paper')||(hc == 'paper' && cc =='scissors')||(hc == 'scissors' && cc =='rock'))
-    {
-        result = "computer"
-    }
-
-
-    if(result == 'human')    
-    {
-        humanscore.textContent = parseInt(humanscore.textContent) + 1
-    }
-    if(result == 'computer')
-    {
-        computerscore.textContent = parseInt(computerscore.textContent) +1
-    }
-    else{
-        alert('its a tie !!!')
-    }
 }
 
 
-startButton.addEventListener("click", playTheGame)
+function playRound(){
+    
+    
+
+        let hc = getHumanChoice()//human choice
+        let cc = getComputerChoice()//computer choice 
+        let result
+        
+        if((hc == 'rock' && cc =='rock') || (hc == 'paper' && cc =='paper')|| (hc == 'scissors' && cc =='scissors'))
+        {
+            result = "tie"
+        }
+        
+        if((hc == 'rock' && cc =='scissors')||(hc == 'paper' && cc =='rock')||(hc == 'scissors' && cc =='paper'))
+        {
+            result = "human"
+        }
+        if((hc == 'rock' && cc =='paper')||(hc == 'paper' && cc =='scissors')||(hc == 'scissors' && cc =='rock'))
+        {
+            result = "computer"
+        }
+
+
+        if(result == 'human')    
+        {
+
+            humanScoreDisplay.textContent = parseInt(humanScoreDisplay.textContent) + 1
+            humanScore = parseInt(humanScoreDisplay.textContent)
+        }
+        if(result == 'computer')
+        {
+            computerScoreDisplay.textContent = parseInt(computerScoreDisplay.textContent) +1
+            computerScore = parseInt(computerScoreDisplay.textContent)
+        }
+        if(result == 'tie'){
+            alert('its a tie !!!')
+        }
+        if(isGameover()){
+            if(humanScore == 5)alert('you won')
+            else alert('you lost')
+        document.querySelector('.gameover').style.display = 'block'
+        humanScoreDisplay.textContent = 0
+        computerScoreDisplay.textContent = 0
+        console.log(humanScore+computerScore);
+        
+        }
+    
+    
+    
+}
+
+
+startButton.addEventListener("click", handleClick)
